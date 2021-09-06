@@ -26,7 +26,9 @@ export default function UserList() {
 
   return (
     <List className={classes.root}>
-      <ListItem alignItems="flex-start">
+      <ListItem alignItems="flex-start" onClick={()=>{
+          console.log("show user");
+      }}>
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
