@@ -19,11 +19,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "react-jsx"
   },
   "include": [
     "src",
-    "**/*.ts", "**/*.tsx"
+    "**/*.ts",
+    "**/*.tsx"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

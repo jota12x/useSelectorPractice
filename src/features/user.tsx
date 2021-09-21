@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
 
 export type SelectedUser = {
@@ -22,10 +22,17 @@ const userSlice = createSlice({
         setSelectedUser(state, action: PayloadAction<SelectedUser>){
             state.selectedUser = action.payload.selectedUser;
         },
+        changePersonalNote(state, action: PayloadAction<{note:string}>){
+            state.selectedUser.personal_note = action.payload.note;
+        }
     }
 })
 
 export const selectedUserSelector = (state:RootState)=>state.user.selectedUser;
+export  const selectedUsernameSelector = createSelector(
+    [selectedUserSelector],
+    (selectedUser) => selectedUser.name,
+  );
 
-export const {setSelectedUser} =  userSlice.actions;
+export const {changePersonalNote, setSelectedUser} =  userSlice.actions;
 export default userSlice.reducer;

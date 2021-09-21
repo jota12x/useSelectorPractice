@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import * as _ from "lodash";
+
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { selectedUserSelector } from 'src/features/user';
-import {useSelector} from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { RootState } from 'src/features';
+import {shallowEqual, useSelector} from 'react-redux';
+// import { RootState } from 'src/features';
+import { selectedUsernameSelector, selectedUserSelector } from 'src/features/user';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -36,20 +36,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const UserInformation = ()=> {
+const UsernameBanner = ()=> {
   const classes = useStyles();
-  // const selectedUser = useSelector(selectedUserSelector);
-  const selectedUser = useSelector(((state: RootState)=> state.user.selectedUser));
-
-  const [renderAgain, setRenderAgain] = useState(false);
+  const selectedUser = useSelector(selectedUserSelector);
+//   const selectedUsername = useSelector(selectedUsernameSelector);
+//   const selectedUser = useSelector(((state: RootState)=> state.user.selectedUser));
 
   console.log("=====");
-  console.log("UserInformation rendered");
-  console.log('selectedUser', selectedUser);
+  console.log("UsernameBanner rendered");
   //won''t trigger a rerender because the reference stays the same
-  useEffect(()=>{
-    console.log("selectedUser changed!");
-  },[selectedUser])
+//   useEffect(()=>{
+//     console.log("selectedUser changed!");
+//   },[selectedUser])
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
@@ -57,18 +55,12 @@ const UserInformation = ()=> {
           <Typography component="h5" variant="h5">
             {selectedUser.name}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {selectedUser.personal_note}
-          </Typography>
-          {selectedUser.name!=="" && <Button variant="contained" color="primary"
-            style={{marginTop: 14}} onClick={()=>{
-              setRenderAgain(true);
-            }}>
-              Post To Twitter
-          </Button>}
+         {selectedUser.name!=="" &&  <Typography>
+              is playing music
+          </Typography>}
         </CardContent>
       </div>
     </Card>
   );
 }
-export default React.memo(UserInformation);
+export default React.memo(UsernameBanner);

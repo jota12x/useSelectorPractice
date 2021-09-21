@@ -11,6 +11,7 @@ import {USERS_LIST} from '../utils/constants';
 import { SelectedUser, setSelectedUser } from 'src/features/user';
 import { submittedUserSelector } from 'src/features/form';
 import {useSelector} from 'react-redux';
+import { RootState } from 'src/features';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,11 +27,16 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function UserList() {
+const UserList = () =>  {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [userList , setUserList]= useState<SelectedUser['selectedUser'][]>([]);
   const submittedUser = useSelector(submittedUserSelector);
+  // const submittedUser = useSelector((state:RootState)=>state.form.submittedUser);
+
+
+  console.log("=====");
+  console.log("UserList rendered");
 
   useEffect(()=>{
     setUserList(USERS_LIST);
@@ -71,3 +77,4 @@ export default function UserList() {
     </List>
   );
 }
+export default React.memo(UserList);
