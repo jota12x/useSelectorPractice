@@ -31,8 +31,19 @@ const userSlice = createSlice({
 export const selectedUserSelector = (state:RootState)=>state.user.selectedUser;
 export  const selectedUsernameSelector = createSelector(
     [selectedUserSelector],
-    (selectedUser) => selectedUser.name,
+    (selectedUser) => {
+        // console.log("expensive!");
+        return selectedUser.name;
+    }
   );
 
 export const {changePersonalNote, setSelectedUser} =  userSlice.actions;
 export default userSlice.reducer;
+
+export const usernameBannerSelector = createSelector(
+    [selectedUsernameSelector],
+    (username)=> {
+        console.log("expensive!");
+        return `${username} is playing music`;
+    }
+)

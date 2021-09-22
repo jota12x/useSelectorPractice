@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {shallowEqual, useSelector} from 'react-redux';
 // import { RootState } from 'src/features';
-import { selectedUsernameSelector, selectedUserSelector } from 'src/features/user';
+import { selectedUsernameSelector, selectedUserSelector, usernameBannerSelector } from 'src/features/user';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const UsernameBanner = ()=> {
   const classes = useStyles();
   const selectedUser = useSelector(selectedUserSelector);
+  const bannerMessage = useSelector(usernameBannerSelector);
 //   const selectedUsername = useSelector(selectedUsernameSelector);
 //   const selectedUser = useSelector(((state: RootState)=> state.user.selectedUser));
 
@@ -52,12 +53,15 @@ const UsernameBanner = ()=> {
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
+          {/* <Typography component="h5" variant="h5">
             {selectedUser.name}
+          </Typography> */}
+          <Typography component="h5" variant="h5">
+            {bannerMessage}
           </Typography>
-         {selectedUser.name!=="" &&  <Typography>
+         {/* {selectedUser.name!=="" &&  <Typography>
               is playing music
-          </Typography>}
+          </Typography>} */}
         </CardContent>
       </div>
     </Card>
